@@ -117,7 +117,7 @@ Most of these run in production today. Source is private (client and live system
 - **Discipline:** multi-agent service (career)
 - **For:** active job-seekers — especially career-changers, veterans translating military experience into civilian terms, and students with thin resumes — whose energy shouldn't be burned on spray-and-pray and whose applications shouldn't all read like the same template.
 - **What you get each week:** a small set of *verified-open* roles, **weighted to your own priorities** (location, role type, comp floor, industry, remote vs hybrid, anything you tell it to care about), each one with its own ATS-tailored resume AND its own cover letter — bespoke per role, none of them generic, none fabricated, packaged and emailed.
-- **Engage:** $40/month subscription. → **[jobforge.bluelinescannables.com](https://jobforge.bluelinescannables.com/)**
+- **Engage:** $40/month subscription. → *DM to start.*
 - **What it does (the pipeline):** three isolated phases per week — **(1)** weighted search and scoring against subscriber priorities; **(2)** independent verification that every posting is actually open, with backfill for dead ones; **(3)** per-job custom resume + custom cover letter generation, packaged and delivered.
 - **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
 - **Why it matters:** verify-*before*-generate means tokens never get spent tailoring to dead postings; per-job bespoke document generation at scale means every application is the candidate's actual best foot forward; and a strict "never fabricate experience" floor protects the candidate from the most expensive mistake.
