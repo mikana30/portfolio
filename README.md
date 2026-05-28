@@ -1,6 +1,6 @@
 # Mike Bauman — Project Portfolio
 
-I design, build, and ship production **agentic-AI systems** end to end. Below are nine, spanning agent infrastructure, applied-AI products, autonomous research, security automation, and endpoint tooling.
+I design, build, and ship production **agentic-AI systems** end to end. Below are nine, spanning agent infrastructure, applied-AI services, autonomous research, security automation, and endpoint tooling.
 
 The throughline comes from two decades in digital forensics, where an unverifiable claim gets evidence thrown out of court: I build AI that **verifies before it speaks, attributes its sources, recovers from its own failures, and never fails silently.**
 
@@ -73,29 +73,29 @@ Most of these run in production today. Source is private (client and live system
 ---
 
 ## 5. InsightForge
-*A B2B sales-intelligence service. $50 per verified prospect dossier, auto-refunded if the data comes up thin.*
+*Senior-grade B2B prospect dossiers in under 24 hours: org profile, decision-makers, tech and security posture, attack-surface findings, and talking points adapted to **what you're actually selling them**. $50 per dossier, auto-refunded if the data comes up thin.*
 
 - **Discipline:** applied-AI service (B2B sales intelligence)
-- **For:** B2B sales professionals — account execs, MSSPs, brokers, staffing — anyone walking into a prospect meeting who needs senior-grade depth in 24 hours instead of a week.
-- **Engage:** $50 per dossier. → *DM for a sample report or to commission one.*
-- **What it does:** A customer submits a prospect plus selling context; an LLM research worker runs a structured multi-search playbook (10+ searches, adapted to context), passes a quality gate, emits a JSON manifest, gets **cold-session verified**, then a deterministic renderer produces a branded report. Paid, with an automatic refund when the data is insufficient.
-- **Built with:** Python web service · SQLite job queue · Stripe (payments + refunds) · web/search APIs · Node.js + `docx` renderer · prompt-injection hardening (all user input treated as untrusted) · nginx / Let's Encrypt deploy.
-- **Scale / status:** Live service — served customers, admin console, affiliate program, refund handling, sample reports. Production, not a demo.
-- **Why it matters:** clean separation of nondeterministic research from deterministic rendering, plus economic guardrails (quality gate + auto-refund) — AI you can charge money for and stand behind.
+- **For:** B2B sales pros — account execs, MSSPs, brokers, staffing — who need a depth-of-prep brief in 24 hours instead of a week of manual digging.
+- **What you get:** a prospect-specific dossier covering org structure and key decision-makers, current tech/security stack, passive attack-surface findings, regulatory and incident posture, and selling-angle talking points calibrated to your offering — every claim sourced, nothing invented.
+- **Engage:** $50 per dossier; full automatic refund if the data is thin. → *Live site with free sample reports — DM for a sample or to commission one.*
+- **Built with:** Python web service · SQLite job queue · Stripe (payments + refunds) · 10+ structured searches per dossier, adapted at runtime to the selling context · BBOT-style passive recon · Node.js + `docx` renderer · **cold-session verification** before delivery · prompt-injection hardening (all user input treated as untrusted) · nginx / Let's Encrypt.
+- **Scale / status:** Live service — served customers, admin console, affiliate program, refund flow, sample reports.
+- **Why it matters:** the quality gate and the auto-refund are the economic guardrails that keep the AI honest — when the data isn't there, the system says so and the customer gets their money back. AI you can charge for and stand behind.
 
 ---
 
 ## 6. InterviewEdge
-*A research-backed interview-prep service — built so veterans and college students can walk into interviews with the same caliber of company intel as a senior hire.*
+*A deep interview-prep service that triangulates **the company, the specific role, and your own resume** — so the prep dossier is YOU walking into THAT company for THAT job, not a generic company brief.*
 
 - **Discipline:** applied-AI service (career / hiring equity)
-- **For:** veterans transitioning out of service, college students entering the workforce, and anyone heading into an interview who deserves a fair shot at the answers a senior hire would already have.
-- **Engage:** → *DM for pricing or a sample dossier.*
-- **Mission:** Veterans transitioning out of service and college students entering the workforce often have the most to prove and the fewest resources for deep, role-specific company prep. InterviewEdge gives them the dossier a senior candidate would spend a week building — in minutes.
-- **What it does:** A buyer submits a target company and role, uploads a resume; an LLM research worker assembles company financials, org structure, leadership bios, compensation benchmarks, culture signals, and the regulatory landscape into sourced talking points; a deterministic generator renders a polished dossier and emails it.
-- **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake.
-- **Scale / status:** Live service with a full marketing site and sample reports. **In real-world trial runs, 3 out of 3 candidates prepped with InterviewEdge converted to an offer or a follow-up interview.**
-- **Why it matters:** productizing a senior-grade research engine so the playing field gets a little flatter for the candidates who need it most.
+- **For:** veterans transitioning out of service, college students entering the workforce, career-changers — anyone who deserves a fair shot at the answers a senior hire would already have walked in with.
+- **What you get:** a bespoke per-interview dossier — the company's financials, org structure, leadership bios, comp benchmarks, culture-fit signals, regulatory landscape — **cross-referenced against your actual resume** so the prep, the angles, and the suggested talking points are specific to you, not boilerplate.
+- **Engage:** → *Live site with free sample dossiers — DM for pricing or to order.*
+- **Mission:** Veterans transitioning out of service and college students entering the workforce often have the most to prove and the fewest resources for deep, role-specific prep. InterviewEdge gives them the dossier a senior candidate would spend a week building — in minutes.
+- **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake · per-candidate cross-referencing of resume against the target company and role.
+- **Proof:** **3 of 3 candidates** in real-world trial runs converted to an offer or a follow-up interview.
+- **Why it matters:** productizing a senior-grade research engine, candidate-specific, so the playing field gets a little flatter for the people who need it most.
 
 ---
 
@@ -112,29 +112,29 @@ Most of these run in production today. Source is private (client and live system
 ---
 
 ## 8. JobForge
-*A weekly multi-agent job-search service. $40/month per subscriber — fewer applications, all to verified-open roles, each one tailored honestly.*
+*A weekly **weighted** job-search service: every verified-open match comes with **its own custom resume AND its own custom cover letter** — not one generic resume sprayed across twenty postings.*
 
 - **Discipline:** multi-agent service (career)
-- **For:** active job-seekers — especially career-changers, veterans translating military experience, and students with thin resumes — whose energy shouldn't be burned on spray-and-pray.
-- **Engage:** $40/month subscription, packages delivered weekly. → *DM to start.*
-- **Problem:** Mass-applying burns candidates out before they get traction. Spray-and-pray treats every posting the same — stale ones, ghost posts, and the ones where a tailored application would have moved the needle. The hardest-hit are people already feeling like they have to prove themselves — and a hallucinated bullet point sneaking onto their resume is the last thing they can afford.
-- **What it does:** A weekly three-phase pipeline per subscriber: **(1)** research, filter, and score matching roles; **(2)** independently re-verify that every posting is actually open, backfilling dead ones; **(3)** generate ATS-tailored resumes and cover letters *only* for verified roles, then package and email them.
+- **For:** active job-seekers — especially career-changers, veterans translating military experience into civilian terms, and students with thin resumes — whose energy shouldn't be burned on spray-and-pray and whose applications shouldn't all read like the same template.
+- **What you get each week:** a small set of *verified-open* roles, **weighted to your own priorities** (location, role type, comp floor, industry, remote vs hybrid, anything you tell it to care about), each one with its own ATS-tailored resume AND its own cover letter — bespoke per role, none of them generic, none fabricated, packaged and emailed.
+- **Engage:** $40 / month subscription. → *DM to start.*
+- **What it does (the pipeline):** three isolated phases per week — **(1)** weighted search and scoring against subscriber priorities; **(2)** independent verification that every posting is actually open, with backfill for dead ones; **(3)** per-job custom resume + custom cover letter generation, packaged and delivered.
 - **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
-- **Scale / status:** Live subscription, delivering real weekly application packages.
-- **Why it matters:** verify-*before*-generate ordering, per-phase context isolation, and a strict "never fabricate experience" floor — multi-agent orchestration where correctness is built into the pipeline shape, not patched on afterward.
+- **Why it matters:** verify-*before*-generate means tokens never get spent tailoring to dead postings; per-job bespoke document generation at scale means every application is the candidate's actual best foot forward; and a strict "never fabricate experience" floor protects the candidate from the most expensive mistake.
 
 ---
 
 ## 9. GRAM
-*A portable USB toolkit that puts an AI repair agent on a live, running Windows machine — with full read access to the actual system state. Free for individuals; a metered commercial service for repair shops and MSPs.*
+*Geek Squad on a USB — with a portable Claude built in. Plug it into a broken Windows machine and an AI repair agent goes to work with full view of the running system.*
 
 - **Discipline:** endpoint AI tooling
-- **What no one else offers:** Linux rescue media is blind to the running OS — it can read files but not query event logs, services, the live registry, loaded drivers, network state, or active processes. Chatbots, meanwhile, are blind to the *specific* machine in front of you. GRAM is the only repair toolkit that combines both: a portable AI agent with hands-on visibility into the live, broken Windows box, reasoning about the *actual* problem instead of asking the user to copy-paste error messages.
-- **What it does:** Plug into a running Windows machine; it launches a zero-dependency local web dashboard, runs PowerShell diagnostics, a security sweep, and 16+ repair actions — and an "AI mode" runs portable Claude Code with full live-system context to diagnose and fix in place.
-- **Built with:** Node.js (zero-dependency local HTTP server, CORS-locked to localhost) · PowerShell (diagnostics / security / repair / drive-imaging / file-recovery) · portable Node + Claude Code CLI · an integrity manifest for tamper detection.
-- **For (commercial service):** repair shops, MSPs, IT consultancies — teams who need AI-augmented live-OS diagnostics across many machines with predictable, metered cost. → *DM for commercial pricing or a trial.*
-- **Scale / status:** Free individual toolkit; commercial service adds metered, multi-seat billing (credit packs and seat plans) for repair shops and MSPs.
-- **Why it matters:** safe by construction — localhost-only networking, integrity-checked binaries, no cloud dependency once on-site. A field tech gets an AI co-pilot that's actually *looking at* the machine, not guessing from a chat transcript.
+- **What it is, in one line:** Imagine a Geek Squad tech who can teleport to any broken PC, already has every diagnostic and repair tool ready, and brings an AI co-pilot that can actually *see* the machine — not a generic chatbot guessing from a copy-pasted error message. **GRAM is that, on a USB.**
+- **What no one else offers:** Linux rescue media is blind to the running OS (it can read files, but it can't query event logs, services, the live registry, loaded drivers, network state, or active processes). Generic AI chatbots are blind to the *specific* machine. GRAM combines both — a portable AI repair agent with hands-on visibility into the live, broken Windows box.
+- **What it does:** Plug in the USB; it launches a zero-dependency local web dashboard, runs PowerShell diagnostics, a security sweep, and 16+ repair actions — and an "AI mode" runs portable Claude Code with full live-system context to diagnose and fix in place.
+- **Built with:** Node.js (zero-dependency local HTTP server, CORS-locked to localhost) · PowerShell (diagnostics / security / repair / drive-imaging / file-recovery) · portable Node + Claude Code CLI · integrity manifest for tamper detection.
+- **For (commercial service):** repair shops, MSPs, IT consultancies — teams who need AI-augmented live-OS diagnostics across many machines at predictable, metered cost. → *DM for commercial pricing or a trial.*
+- **Scale / status:** Free for individuals; commercial service adds metered, multi-seat billing (credit packs and seat plans) for repair shops and MSPs.
+- **Why it matters:** safe by construction — localhost-only networking, integrity-checked binaries, no cloud dependency once on-site. A field tech (or a shop running a fleet of them) gets an AI co-pilot that's actually *looking at* the machine, not guessing from a transcript.
 
 ---
 
