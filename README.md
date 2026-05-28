@@ -1,6 +1,6 @@
 # Mike Bauman — Project Portfolio
 
-I design, build, and ship production **agentic-AI systems** — largely solo, with an AI-centric build method. Below are ten of them, spanning agent infrastructure, applied-AI products, autonomous research, security automation, mobile, and endpoint tooling.
+I design, build, and ship production **agentic-AI systems** end to end. Below are nine, spanning agent infrastructure, applied-AI products, autonomous research, security automation, and endpoint tooling.
 
 The throughline comes from two decades in digital forensics, where an unverifiable claim gets evidence thrown out of court: I build AI that **verifies before it speaks, attributes its sources, recovers from its own failures, and never fails silently.**
 
@@ -17,11 +17,10 @@ Most of these run in production today. Source is private (client and live system
 | 3 | [ForensicHunter](#3-forensichunter) | Digital forensics |
 | 4 | [ARGUS](#4-argus) | Autonomous research / entity resolution |
 | 5 | [InsightForge](#5-insightforge) | Applied-AI product (B2B SaaS) |
-| 6 | [InterviewEdge](#6-interviewedge) | Applied-AI product (career) |
-| 7 | [JobForge](#7-jobforge) | Multi-agent pipeline (career) |
+| 6 | [InterviewEdge](#6-interviewedge) | Applied-AI product (career / hiring equity) |
+| 7 | [JobForge](#7-jobforge) | Multi-agent pipeline (career / hiring equity) |
 | 8 | [Quick Hit](#8-quick-hit) | OT/ICS security automation |
 | 9 | [GRAM](#9-gram) | Endpoint AI tooling |
-| 10 | [cc-launcher](#10-cc-launcher) | Mobile AI |
 
 ---
 
@@ -86,26 +85,26 @@ Most of these run in production today. Source is private (client and live system
 ---
 
 ## 6. InterviewEdge
-*A paid service that produces research-backed interview-prep dossiers on a target company and role.*
+*Research-backed interview-prep dossiers — built to help veterans and college students walk into interviews with the same caliber of company intel as a senior hire.*
 
-- **Discipline:** applied-AI product (career)
-- **Problem:** Candidates give generic interview answers because they lack deep, current intel on the company, the role, and its priorities.
-- **What it does:** A buyer submits a target company/role (and their resume); an LLM research worker assembles company financials, org structure, leadership bios, compensation benchmarks, culture signals, and the regulatory landscape into sourced talking points; a deterministic generator renders a dossier and emails it.
+- **Discipline:** applied-AI product (career / hiring equity)
+- **Mission:** Veterans transitioning out of service and college students entering the workforce often have the most to prove and the fewest resources for deep, role-specific company prep. InterviewEdge gives them the dossier a senior candidate would spend a week building — in minutes.
+- **What it does:** A buyer submits a target company and role, uploads a resume; an LLM research worker assembles company financials, org structure, leadership bios, compensation benchmarks, culture signals, and the regulatory landscape into sourced talking points; a deterministic generator renders a polished dossier and emails it.
 - **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake · the same research → verify → render pipeline as the sales product.
 - **Scale / status:** Live paid product with a full marketing site and sample reports.
-- **Why it matters:** the manifest → deterministic-render pattern carried into a new market — productizing a research engine into customer-facing software, with file intake and payment.
+- **Why it matters:** the manifest → deterministic-render pattern applied to a hiring-equity use case — productizing a research engine so the playing field gets a little flatter for the candidates who need it most.
 
 ---
 
 ## 7. JobForge
-*A multi-agent pipeline that finds, independently verifies, and applies to matched jobs with ATS-tailored documents.*
+*A multi-agent job-search pipeline — built to give veterans and college students a real shot at the right roles, not a spray-and-pray application count.*
 
-- **Discipline:** multi-agent pipeline (career)
-- **Problem:** Job seekers burn effort on dead postings and generic applications.
-- **What it does:** A weekly three-phase pipeline per subscriber: **(1)** research/filter/score matching roles; **(2)** independently re-verify that every posting is actually open, backfilling dead ones; **(3)** generate ATS-tailored resumes and cover letters *only* for verified roles, then package and email them.
-- **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration/dispatch · large structured prompt specs per phase.
+- **Discipline:** multi-agent pipeline (career / hiring equity)
+- **Mission:** Veterans translating military experience into civilian terms, and students with thin resumes, often default to mass-applying and burn out before they get traction. JobForge runs the opposite play: fewer applications, all to *verified-open* roles, each tailored honestly — with a hard floor against fabricated experience.
+- **What it does:** A weekly three-phase pipeline per subscriber: **(1)** research, filter, and score matching roles; **(2)** independently re-verify that every posting is actually open, backfilling dead ones; **(3)** generate ATS-tailored resumes and cover letters *only* for verified roles, then package and email them.
+- **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
 - **Scale / status:** In production, delivering real weekly application packages.
-- **Why it matters:** verify-*before*-generate ordering (don't spend tokens tailoring to dead jobs), per-phase context isolation, and a hard "never fabricate experience" floor — multi-agent orchestration with correctness gates built in.
+- **Why it matters:** verify-*before*-generate ordering (don't spend tokens tailoring to dead jobs), per-phase context isolation, and a strict "never fabricate experience" floor — multi-agent orchestration with correctness gates that the mission demands. Candidates already working to prove themselves can't afford a hallucinated resume.
 
 ---
 
@@ -122,26 +121,14 @@ Most of these run in production today. Source is private (client and live system
 ---
 
 ## 9. GRAM
-*A portable USB toolkit that runs AI-driven diagnostics and repairs on a live, broken Windows machine.*
+*A portable USB toolkit that puts an AI repair agent on a live, running Windows machine — with full read access to the actual system state.*
 
 - **Discipline:** endpoint AI tooling
-- **Problem:** Offline rescue media only sees a dead machine's filesystem; technicians need visibility into the *running* OS — event logs, services, registry, drivers, network — and the ability to actually fix it.
-- **What it does:** Plug the USB into a running Windows machine and it launches a zero-dependency local web dashboard, runs PowerShell diagnostics, a security sweep, and 16+ repair actions — plus an "AI mode" that runs portable Claude Code with full live-system context to diagnose and fix.
+- **What no one else offers:** Linux rescue media is blind to the running OS — it can read files but not query event logs, services, the live registry, loaded drivers, network state, or active processes. Chatbots, meanwhile, are blind to the *specific* machine in front of you. GRAM is the only repair toolkit that combines both: a portable AI agent with hands-on visibility into the live, broken Windows box, reasoning about the *actual* problem instead of asking the user to copy-paste error messages.
+- **What it does:** Plug into a running Windows machine; it launches a zero-dependency local web dashboard, runs PowerShell diagnostics, a security sweep, and 16+ repair actions — and an "AI mode" runs portable Claude Code with full live-system context to diagnose and fix in place.
 - **Built with:** Node.js (zero-dependency local HTTP server, CORS-locked to localhost) · PowerShell (diagnostics / security / repair / drive-imaging / file-recovery) · portable Node + Claude Code CLI · an integrity manifest for tamper detection.
 - **Scale / status:** Working toolkit; a commercial tier adds metered, multi-seat billing for repair shops and MSPs.
-- **Why it matters:** packaging an autonomous AI agent to operate *safely* on a live, broken machine — localhost-only networking, integrity checks, and live-OS repair that rescue environments simply can't do.
-
----
-
-## 10. cc-launcher
-*A server-driven AI Android launcher: the home screen is synthesized by an LLM and updated without shipping a new app.*
-
-- **Discipline:** mobile AI
-- **Problem:** A standard home screen is static. This one is AI-driven and server-updatable, with live insight cards — and changes ship without a new APK every time.
-- **What it does:** A thin Kotlin/Compose launcher renders its home screen from a server-synthesized JSON manifest (**server-driven UI**, 8 widget types). A backend bridge synthesizes that manifest by calling an LLM with pre-fetched memory context — generating greeting/insight cards, resolving pins/recents/calendar, and applying live user feedback — all without an app rebuild.
-- **Built with:** Kotlin + Jetpack Compose · OkHttp · coroutines · Material3 · `NotificationListenerService` · Python aiohttp bridge · LLM tool-calling via inline sentinels (bounded calls per turn) · private-network transport.
-- **Scale / status:** Running on a personal Pixel; has an evaluation harness and tests.
-- **Why it matters:** server-driven UI plus a sentinel protocol that lets the model safely call tools (memory read/write, artifact write) within hard bounds, and live feedback reclassification with no rebuild — sophisticated mobile-AI plumbing.
+- **Why it matters:** safe by construction — localhost-only networking, integrity-checked binaries, no cloud dependency once on-site. A field tech gets an AI co-pilot that's actually *looking at* the machine, not guessing from a chat transcript.
 
 ---
 
