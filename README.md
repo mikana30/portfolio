@@ -18,8 +18,8 @@ Most of these run in production today. Source is private (client and live system
 | 4 | [ARGUS](#4-argus) | Autonomous research / entity resolution |
 | 5 | [InsightForge](#5-insightforge) | Applied-AI product (B2B SaaS) |
 | 6 | [InterviewEdge](#6-interviewedge) | Applied-AI product (career / hiring equity) |
-| 7 | [JobForge](#7-jobforge) | Multi-agent pipeline (career / hiring equity) |
-| 8 | [Quick Hit](#8-quick-hit) | OT/ICS security automation |
+| 7 | [Quick Hit](#7-quick-hit) | OT/ICS security automation |
+| 8 | [JobForge](#8-jobforge) | Multi-agent pipeline (career) |
 | 9 | [GRAM](#9-gram) | Endpoint AI tooling |
 
 ---
@@ -31,8 +31,8 @@ Most of these run in production today. Source is private (client and live system
 - **Problem:** LLM agents start every session cold, and the usual memory fixes fail *silently* — a vector store that misses the memory, a context window that drops, an agent that invents because it never checked.
 - **What it does:** Any agent gains durable memory over the **Model Context Protocol** (`remember`/`recall`/`forget`) with zero changes to its reasoning loop.
 - **Built with:** Node.js · MCP server (Streamable HTTP) + Express REST · SQLite (WAL) · **hybrid retrieval** — `sqlite-vec` 3072-dim vector search fused with FTS5 keyword search · temporal knowledge graph + contextual retrieval · async embedding worker with a circuit breaker.
-- **Scale / status:** 400 MB+ knowledge base, running 24/7 for months as shared memory for a fleet of agents; a resilience proxy plus a 3-layer cross-platform watchdog keep it self-healing.
-- **Why it matters:** memory is only useful if it's *always there* — built to verify, attribute, recover, and never fail silently. → **[Full case study](./openbrain-case-study.md)**
+- **Scale / status:** 400 MB+ knowledge base, running 24/7 for months as shared memory for a fleet of agents across multiple machines; a resilience proxy plus a 3-layer cross-platform watchdog keep it self-healing.
+- **Why it matters:** memory is the difference between a chatbot and an assistant — and it's only useful if it's *always there*. → **[Full case study](./openbrain-case-study.md)**
 
 ---
 
@@ -90,25 +90,13 @@ Most of these run in production today. Source is private (client and live system
 - **Discipline:** applied-AI product (career / hiring equity)
 - **Mission:** Veterans transitioning out of service and college students entering the workforce often have the most to prove and the fewest resources for deep, role-specific company prep. InterviewEdge gives them the dossier a senior candidate would spend a week building — in minutes.
 - **What it does:** A buyer submits a target company and role, uploads a resume; an LLM research worker assembles company financials, org structure, leadership bios, compensation benchmarks, culture signals, and the regulatory landscape into sourced talking points; a deterministic generator renders a polished dossier and emails it.
-- **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake · the same research → verify → render pipeline as the sales product.
-- **Scale / status:** Live paid product with a full marketing site and sample reports.
-- **Why it matters:** the manifest → deterministic-render pattern applied to a hiring-equity use case — productizing a research engine so the playing field gets a little flatter for the candidates who need it most.
+- **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake.
+- **Scale / status:** Live paid product with a full marketing site and sample reports. **In real-world trial runs, 3 out of 3 candidates prepped with InterviewEdge converted to an offer or a follow-up interview.**
+- **Why it matters:** productizing a senior-grade research engine so the playing field gets a little flatter for the candidates who need it most.
 
 ---
 
-## 7. JobForge
-*A multi-agent job-search pipeline — built to give veterans and college students a real shot at the right roles, not a spray-and-pray application count.*
-
-- **Discipline:** multi-agent pipeline (career / hiring equity)
-- **Mission:** Veterans translating military experience into civilian terms, and students with thin resumes, often default to mass-applying and burn out before they get traction. JobForge runs the opposite play: fewer applications, all to *verified-open* roles, each tailored honestly — with a hard floor against fabricated experience.
-- **What it does:** A weekly three-phase pipeline per subscriber: **(1)** research, filter, and score matching roles; **(2)** independently re-verify that every posting is actually open, backfilling dead ones; **(3)** generate ATS-tailored resumes and cover letters *only* for verified roles, then package and email them.
-- **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
-- **Scale / status:** In production, delivering real weekly application packages.
-- **Why it matters:** verify-*before*-generate ordering (don't spend tokens tailoring to dead jobs), per-phase context isolation, and a strict "never fabricate experience" floor — multi-agent orchestration with correctness gates that the mission demands. Candidates already working to prove themselves can't afford a hallucinated resume.
-
----
-
-## 8. Quick Hit
+## 7. Quick Hit
 *A self-healing OT/ICS threat-advisory monitor that repairs its own broken scrapers at near-zero cost.*
 
 - **Discipline:** OT/ICS security automation
@@ -117,6 +105,18 @@ Most of these run in production today. Source is private (client and live system
 - **Built with:** Python (`ThreadPoolExecutor`) · `requests` / BeautifulSoup / `cloudscraper` + a real-browser CDP fetch for hard targets · NVD + CISA ICS APIs · a **tiered LLM self-healing chain** — when a parser breaks, extraction falls back through local-first inference to cloud as a last resort, with a hard daily cap on paid calls.
 - **Scale / status:** 58+ sources, hourly cadence, in production.
 - **Why it matters:** the cost-tiered self-healing is the clever part — broken scrapers get repaired by LLM fallback that prefers free/local inference before paid, so reliability climbs while run-cost stays near zero.
+
+---
+
+## 8. JobForge
+*A multi-agent job-search pipeline — fewer applications, all to verified-open roles, each one tailored honestly.*
+
+- **Discipline:** multi-agent pipeline (career)
+- **Problem:** Mass-applying burns candidates out before they get traction. Spray-and-pray treats every posting the same — stale ones, ghost posts, and ones where a tailored application would have moved the needle. The hardest-hit are people already feeling like they have to prove themselves: career-changers, veterans translating military experience, students with thin resumes — and a hallucinated bullet point sneaking onto their resume is the last thing they can afford.
+- **What it does:** A weekly three-phase pipeline per subscriber: **(1)** research, filter, and score matching roles; **(2)** independently re-verify that every posting is actually open, backfilling dead ones; **(3)** generate ATS-tailored resumes and cover letters *only* for verified roles, then package and email them.
+- **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
+- **Scale / status:** In production, delivering real weekly application packages.
+- **Why it matters:** verify-*before*-generate ordering, per-phase context isolation, and a strict "never fabricate experience" floor — multi-agent orchestration where correctness is built into the pipeline shape, not patched on afterward.
 
 ---
 
