@@ -2,7 +2,7 @@
 
 I design, build, and ship production **agentic-AI systems** end to end. Below are nine, spanning agent infrastructure, applied-AI services, autonomous research, security automation, and endpoint tooling.
 
-The throughline comes from two decades in digital forensics, where an unverifiable claim gets evidence thrown out of court: I build AI that **verifies before it speaks, attributes its sources, recovers from its own failures, and never fails silently.**
+The throughline comes from two decades across law enforcement, investigations, and digital forensics, where an unverifiable claim gets evidence thrown out of court: I build AI that **verifies before it speaks, attributes its sources, recovers from its own failures, and never fails silently.**
 
 Most of these run in production today. Source is private (client and live systems), so each entry below is a one-page spec sheet — the public view of the work.
 
@@ -78,7 +78,7 @@ Most of these run in production today. Source is private (client and live system
 - **Discipline:** applied-AI service (B2B sales intelligence)
 - **For:** B2B sales pros — account execs, MSSPs, brokers, staffing — who need a depth-of-prep brief in 24 hours instead of a week of manual digging.
 - **What you get:** a prospect-specific dossier covering org structure and key decision-makers, current tech/security stack, passive attack-surface findings, regulatory and incident posture, and selling-angle talking points calibrated to your offering — every claim sourced, nothing invented.
-- **Engage:** $50 per dossier; full automatic refund if the data is thin. → **[insightforge.bluelinescannables.com](https://insightforge.bluelinescannables.com/)** · **[free sample report](https://insightforge.bluelinescannables.com/sample-insightforge-report.html)**
+- **Engage:** first report free, then $50 per dossier — with a full automatic refund if the data comes up thin. → **[insightforge.bluelinescannables.com](https://insightforge.bluelinescannables.com/)** · **[free sample report](https://insightforge.bluelinescannables.com/sample-insightforge-report.html)**
 - **Built with:** Python web service · SQLite job queue · Stripe (payments + refunds) · 10+ structured searches per dossier, adapted at runtime to the selling context · BBOT-style passive recon · Node.js + `docx` renderer · **cold-session verification** before delivery · prompt-injection hardening (all user input treated as untrusted) · nginx / Let's Encrypt.
 - **Scale / status:** Live service — served customers, admin console, affiliate program, refund flow, sample reports.
 - **Why it matters:** the quality gate and the auto-refund are the economic guardrails that keep the AI honest — when the data isn't there, the system says so and the customer gets their money back. AI you can charge for and stand behind.
@@ -91,7 +91,7 @@ Most of these run in production today. Source is private (client and live system
 - **Discipline:** applied-AI service (career / hiring equity)
 - **For:** veterans transitioning out of service, college students entering the workforce, career-changers — anyone who deserves a fair shot at the answers a senior hire would already have walked in with.
 - **What you get:** a bespoke per-interview dossier — the company's financials, org structure, leadership bios, comp benchmarks, culture-fit signals, regulatory landscape — **cross-referenced against your actual resume** so the prep, the angles, and the suggested talking points are specific to you, not boilerplate.
-- **Engage:** → **[interviewedge.bluelinescannables.com](https://interviewedge.bluelinescannables.com/)** · **[free sample dossier](https://interviewedge.bluelinescannables.com/sample-interviewedge-report.html)**
+- **Engage:** first report free, then $25 per report — with a full automatic refund if the prep falls short. → **[interviewedge.bluelinescannables.com](https://interviewedge.bluelinescannables.com/)** · **[free sample dossier](https://interviewedge.bluelinescannables.com/sample-interviewedge-report.html)**
 - **Mission:** Veterans transitioning out of service and college students entering the workforce often have the most to prove and the fewest resources for deep, role-specific prep. InterviewEdge gives them the dossier a senior candidate would spend a week building — in minutes.
 - **Built with:** Python web service · SQLite · Stripe · Node.js dossier generator · resume / file-upload intake · per-candidate cross-referencing of resume against the target company and role.
 - **Proof:** **3 of 3 candidates** in real-world trial runs converted to an offer or a follow-up interview.
@@ -117,7 +117,7 @@ Most of these run in production today. Source is private (client and live system
 - **Discipline:** multi-agent service (career)
 - **For:** active job-seekers — especially career-changers, veterans translating military experience into civilian terms, and students with thin resumes — whose energy shouldn't be burned on spray-and-pray and whose applications shouldn't all read like the same template.
 - **What you get each week:** a small set of *verified-open* roles, **weighted to your own priorities** (location, role type, comp floor, industry, remote vs hybrid, anything you tell it to care about), each one with its own ATS-tailored resume AND its own cover letter — bespoke per role, none of them generic, none fabricated, packaged and emailed.
-- **Engage:** $40/month subscription. → *DM to start.*
+- **Engage:** $40/month subscription. → **[jobforge.bluelinescannables.com](https://jobforge.bluelinescannables.com/)**
 - **What it does (the pipeline):** three isolated phases per week — **(1)** weighted search and scoring against subscriber priorities; **(2)** independent verification that every posting is actually open, with backfill for dead ones; **(3)** per-job custom resume + custom cover letter generation, packaged and delivered.
 - **Built with:** Python + a Node.js document generator · SQLite · each phase a fresh, isolated Claude session · bash orchestration / dispatch · large structured prompt specs per phase.
 - **Why it matters:** verify-*before*-generate means tokens never get spent tailoring to dead postings; per-job bespoke document generation at scale means every application is the candidate's actual best foot forward; and a strict "never fabricate experience" floor protects the candidate from the most expensive mistake.
